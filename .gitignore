@@ -1,0 +1,30 @@
+node_modules
+.next
+out
+build
+dist
+
+.env
+.env.local
+.env.*.local
+
+.DS_Store
+*.pem
+.vscode
+.idea
+.fleet
+.nova
+.zed
+
+npm-debug.log*
+yarn-error.log
+*.tsbuildinfo
+next-env.d.ts.timestamp
+
+# Test artifacts
+playwright-report
+test-results
+coverage
+
+# Build artifacts
+.next-build.log

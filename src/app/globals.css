@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tsg-green: #0a4d2e;
+  --tsg-gold: #c9a14a;
+}
+
+html, body { height: 100%; }
+body { background: #fff; color: #222; }
