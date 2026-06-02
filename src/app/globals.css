@@ -4,8 +4,77 @@
 
 :root {
   --tsg-green: #0a4d2e;
+  --tsg-deep: #063d23;
   --tsg-gold: #c9a14a;
+  --tsg-gold-soft: #e6cf94;
+  --tsg-cream: #f7f4ec;
 }
 
 html, body { height: 100%; }
-body { background: #fff; color: #222; }
+body {
+  background: #fff;
+  color: #1c2218;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--tsg-gold);
+  color: #1c2218;
+}
+
+/* Display font helper for headings */
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+/* Gold "eyebrow" label used above section titles */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--tsg-gold);
+}
+.eyebrow::before {
+  content: '';
+  width: 1.75rem;
+  height: 2px;
+  background: currentColor;
+  display: inline-block;
+}
+
+/* Subtle Nigerian-flag-inspired top accent bar */
+.flag-rule {
+  background: linear-gradient(90deg, var(--tsg-green) 0 50%, #fff 50% 100%);
+}
+
+/* Scroll-reveal: hidden until .is-visible is added by the Reveal observer */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .animate-ken-burns,
+  .animate-float-slow {
+    animation: none !important;
+  }
+}

@@ -30,7 +30,14 @@ export default function Header() {
     <header className="bg-white shadow sticky top-0 z-30">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/assets/img/tsg-logo.png" alt="TSG" width={48} height={48} priority />
+          <Image
+            src="/assets/img/tsg_logo.png"
+            alt="Tinubu Support Group"
+            width={528}
+            height={472}
+            priority
+            className="h-12 w-auto"
+          />
           <span className="font-bold text-[var(--tsg-green)] hidden sm:inline">Tinubu Support Group</span>
         </Link>
         <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">

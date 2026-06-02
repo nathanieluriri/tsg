@@ -28,3 +28,4 @@ coverage
 
 # Build artifacts
 .next-build.log
+.next-dev.log
