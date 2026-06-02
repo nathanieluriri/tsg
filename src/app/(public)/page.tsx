@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import {
   ArrowRight,
   GraduationCap,
@@ -19,8 +18,16 @@ import { Faq } from '@/models/Faq';
 import { Setting } from '@/models/Setting';
 import { incrementSiteViews } from '@/models/SiteView';
 import PostCard from '@/components/public/PostCard';
+import Hero from '@/components/public/home/Hero';
 import Reveal from '@/components/public/home/Reveal';
 import CountUp from '@/components/public/home/CountUp';
+
+const FALLBACK_HERO_IMAGES = [
+  '/assets/img/hero-carousel/hero-carousel-1.jpg',
+  '/assets/img/hero-carousel/tsg2.png',
+  '/assets/img/hero-carousel/hero-carousel-3.jpg',
+  '/assets/img/hero-carousel/tinubu1.png',
+];
 
 const STATS = [
   { value: 36, suffix: '', label: 'States & FCT', separator: false },
@@ -67,10 +74,16 @@ export default async function HomePage() {
     .populate('user', 'name')
     .lean();
 
-  const heroSrc =
-    sliders[0]?.image && typeof sliders[0].image === 'object' && 'link' in sliders[0].image
-      ? String(sliders[0].image.link)
-      : '/assets/img/hero-carousel/tinubu1.png';
+  const sliderImages = sliders
+    .map((s) =>
+      s.image && typeof s.image === 'object' && 'link' in s.image
+        ? String((s.image as { link: string }).link)
+        : null,
+    )
+    .filter((v): v is string => !!v);
+  // Burst sequence for the opening animation; the last image settles as the
+  // hero background. Use real slider images when present, else curated fallbacks.
+  const heroImages = (sliderImages.length >= 2 ? sliderImages : FALLBACK_HERO_IMAGES).slice(0, 4);
 
   const sameAs = [setting.fbLink, setting.twLink, setting.igLink, setting.ytLink].filter(
     (v): v is string => typeof v === 'string' && v.length > 0,
@@ -118,64 +131,10 @@ export default async function HomePage() {
       />
 
       {/* ---------------------------------------------------------------- Hero */}
-      <section className="relative isolate flex min-h-[600px] items-center overflow-hidden bg-tsg-deep text-white md:min-h-[88vh]">
-        <div className="absolute inset-0 -z-10">
-          <Image
-            src={heroSrc}
-            alt="President Bola Ahmed Tinubu"
-            fill
-            priority
-            sizes="100vw"
-            className="animate-ken-burns object-cover object-top"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-tsg-deep/95 via-tsg-green/80 to-tsg-green/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-tsg-deep/90 via-transparent to-tsg-deep/40" />
-        </div>
-
-        <div className="mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 md:py-32 lg:px-8">
-          <div className="max-w-2xl">
-            <p className="eyebrow animate-reveal-up text-tsg-gold-soft">Renewed Hope Agenda</p>
-            <h1
-              className="font-display mt-5 animate-reveal-up text-5xl font-semibold leading-[1.03] tracking-tight md:text-6xl lg:text-7xl"
-              style={{ animationDelay: '100ms' }}
-            >
-              Renewed Hope.
-              <br />
-              <span className="italic text-tsg-gold">Stronger Nigeria.</span>
-            </h1>
-            <p
-              className="mt-6 max-w-xl animate-reveal-up text-lg text-white/85 md:text-xl"
-              style={{ animationDelay: '200ms' }}
-            >
-              Joining hands with President Bola Ahmed Tinubu to build a brighter future for
-              every Nigerian — one community, one citizen at a time.
-            </p>
-            <div
-              className="mt-9 flex animate-reveal-up flex-wrap gap-4"
-              style={{ animationDelay: '300ms' }}
-            >
-              <Link
-                href="/register"
-                className="group inline-flex items-center gap-2 rounded-full bg-tsg-gold px-7 py-3.5 font-semibold text-tsg-deep shadow-lg shadow-black/20 transition hover:bg-tsg-gold-soft hover:shadow-xl"
-              >
-                Become a Member
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-3.5 font-semibold text-white backdrop-blur-sm transition hover:border-white hover:bg-white/10"
-              >
-                Our Vision
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <div className="absolute inset-x-0 bottom-0 h-1.5 flag-rule" />
-      </section>
+      <Hero images={heroImages} />
 
       {/* --------------------------------------------------------------- Stats */}
-      <section className="bg-tsg-deep text-white">
+      <section id="stats" className="bg-tsg-deep text-white">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-10 px-4 py-14 text-center sm:px-6 lg:grid-cols-4 lg:px-8">
           {STATS.map((s, i) => (
             <Reveal key={s.label} delay={i * 90}>
@@ -320,7 +279,6 @@ export default async function HomePage() {
             </div>
           </Reveal>
         </div>
-        <div className="h-1.5 w-full flag-rule" />
       </section>
 
       {/* ----------------------------------------------------------------- FAQ */}

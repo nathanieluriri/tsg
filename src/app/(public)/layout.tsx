@@ -3,6 +3,7 @@ import { connectDB } from '@/lib/db';
 import { Setting } from '@/models/Setting';
 import Header from '@/components/public/Header';
 import Footer from '@/components/public/Footer';
+import SmoothScroll from '@/components/public/scroll/SmoothScroll';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,10 +19,12 @@ export default async function PublicLayout({ children }: { children: ReactNode }
     );
   }
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <main className="flex-1">{children}</main>
-      <Footer setting={setting.toObject()} />
-    </div>
+    <SmoothScroll>
+      <div className="flex flex-col min-h-screen">
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer setting={setting.toObject()} />
+      </div>
+    </SmoothScroll>
   );
 }
