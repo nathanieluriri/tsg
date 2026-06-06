@@ -21,26 +21,23 @@ export interface ScrollStoryProps {
 }
 
 /**
- * Merges "Who We Are" (AboutStory) and "Leadership & Vision" (LeadershipVision).
- * On capable desktops it upgrades to a pinned, scroll-scrubbed story; everywhere
- * else (mobile, < lg, touch-primary, reduced-motion, no-JS, crawlers) it renders
- * the two sections stacked exactly as before.
+ * Merges "Who We Are" (AboutStory) and "Leadership & Vision" (LeadershipVision)
+ * into one pinned, scroll-scrubbed story on every screen size (desktop side-by-side,
+ * mobile stacked image-over-text). Users who ask for reduced motion -- plus the
+ * SSR / no-JS / crawler first render -- get the two sections stacked exactly as
+ * before, so nothing scroll-jacks them.
  */
 export default function ScrollStory({ description, vision, mission }: ScrollStoryProps) {
   const [pinned, setPinned] = useState(false);
 
   useIsoLayoutEffect(() => {
-    const queries = [
-      window.matchMedia('(min-width: 1024px)'),
-      window.matchMedia('(pointer: fine)'),
-      window.matchMedia('(prefers-reduced-motion: reduce)'),
-    ];
-    const [mqDesktop, mqFinePointer, mqReducedMotion] = queries;
-    const update = () =>
-      setPinned(mqDesktop.matches && mqFinePointer.matches && !mqReducedMotion.matches);
+    // Pin on every screen size now (mobile included); only fall back to the static
+    // stacked layout for reduced-motion users (and the SSR/no-JS first render).
+    const mqReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setPinned(!mqReducedMotion.matches);
     update();
-    queries.forEach((q) => q.addEventListener('change', update));
-    return () => queries.forEach((q) => q.removeEventListener('change', update));
+    mqReducedMotion.addEventListener('change', update);
+    return () => mqReducedMotion.removeEventListener('change', update);
   }, []);
 
   if (pinned) {
@@ -113,8 +110,8 @@ function PinnedStory({ description, vision, mission }: ScrollStoryProps) {
     }
     // Only the dominant frame is interactive / perceivable. `inert` (Baseline
     // 2023: Chrome 102, Safari 15.5, Firefox 112) removes the other from tab
-    // order, pointer events, and selection. PinnedStory only mounts on
-    // fine-pointer desktops, so sub-112 Firefox simply gets the static fallback.
+    // order, pointer events, and selection. The static fallback covers reduced
+    // motion; older engines without inert simply keep both frames reachable.
     // `aria-hidden` is paired in lockstep as belt-and-suspenders so the inactive
     // frame's heading never doubles up in the screen-reader outline.
     const aDominant = p < 0.5;
@@ -156,17 +153,18 @@ function PinnedStory({ description, vision, mission }: ScrollStoryProps) {
           aria-hidden="true"
         />
 
-        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
-          {/* Image column (LEFT): fixed frame. The top image is clipped away from
-              the bottom on scroll, uncovering the stationary ("sticky") base image
-              beneath -- a hard "cut" reveal, not a slide. */}
-          <div className="relative h-[68svh] max-h-[40rem] w-full overflow-hidden rounded-[2rem] shadow-2xl shadow-tsg-deep/25">
+        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-6 px-4 py-10 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:py-0 lg:px-8">
+          {/* Image column: fixed frame. The top image is clipped away from the
+              bottom on scroll, uncovering the stationary ("sticky") base image
+              beneath -- a hard "cut" reveal, not a slide. On mobile it sits on top
+              of the text; on desktop it's the left column. */}
+          <div className="relative h-[36svh] w-full overflow-hidden rounded-[1.5rem] shadow-2xl shadow-tsg-deep/25 lg:h-[68svh] lg:max-h-[40rem] lg:rounded-[2rem]">
             {/* Base image (revealed) -- stays put beneath the top image. */}
             <Image
               src="/assets/img/blog/presidentbola.jpg"
               alt="President Bola Ahmed Tinubu"
               fill
-              sizes="(max-width: 1024px) 90vw, 45vw"
+              sizes="(max-width: 1024px) 92vw, 45vw"
               className="object-cover object-center"
             />
             {/* Top image (cut away) -- clip-path shrinks it from the bottom as
@@ -176,32 +174,35 @@ function PinnedStory({ description, vision, mission }: ScrollStoryProps) {
                 src="/assets/img/tinubu2.jpg"
                 alt="President Bola Ahmed Tinubu"
                 fill
-                sizes="(max-width: 1024px) 90vw, 45vw"
+                sizes="(max-width: 1024px) 92vw, 45vw"
                 className="object-cover object-top"
               />
             </div>
           </div>
 
-          {/* Text column (RIGHT): two overlapping frames cross-fade. */}
-          <div className="relative h-[68svh] max-h-[40rem]">
+          {/* Text column: two overlapping frames cross-fade. */}
+          <div className="relative h-[46svh] lg:h-[68svh] lg:max-h-[40rem]">
             {/* Frame A -- Who We Are.
-                The pinned frames are height-constrained (h-[68svh] max-h-[40rem]),
-                so prose below is line-clamped for fit; the static fallback and the
-                linked /about & /pbat pages show the full copy. */}
+                The pinned frames are height-constrained, so prose is line-clamped
+                for fit; the supporting beliefs list shows on lg+. The static
+                fallback and the linked /about & /pbat pages show the full copy. */}
             <div ref={frameARef} className="absolute inset-0 flex flex-col justify-center">
               <p data-blur className="eyebrow text-tsg-green">
                 {STORY.about.eyebrow}
               </p>
               <h2
                 data-blur
-                className="font-onest mt-5 text-[clamp(2.25rem,4.5vw,4rem)] font-normal uppercase leading-[0.95] tracking-[-0.03em] text-tsg-deep"
+                className="font-onest mt-4 text-[clamp(2rem,7vw,4rem)] font-normal uppercase leading-[0.95] tracking-[-0.03em] text-tsg-deep lg:mt-5 lg:text-[clamp(2.25rem,4.5vw,4rem)]"
               >
                 <HeadingLines text={STORY.about.heading} />
               </h2>
-              <p data-blur className="mt-6 max-w-xl text-lg leading-relaxed text-gray-600 line-clamp-4">
+              <p
+                data-blur
+                className="mt-4 max-w-xl text-base leading-relaxed text-gray-600 line-clamp-3 lg:mt-6 lg:text-lg lg:line-clamp-4"
+              >
                 {description || STORY.about.fallbackBody}
               </p>
-              <ul data-blur className="mt-7 space-y-3">
+              <ul data-blur className="mt-6 hidden space-y-3 lg:mt-7 lg:block">
                 {STORY.about.beliefs.map((b) => (
                   <li key={b} className="flex items-center gap-3 text-tsg-deep">
                     <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-tsg-green/12 text-tsg-green">
@@ -211,10 +212,10 @@ function PinnedStory({ description, vision, mission }: ScrollStoryProps) {
                   </li>
                 ))}
               </ul>
-              <div data-blur className="mt-9">
+              <div data-blur className="mt-6 lg:mt-9">
                 <Link
                   href={STORY.about.cta.href}
-                  className="group inline-flex items-center gap-2 rounded-full bg-tsg-green px-7 py-3.5 font-semibold text-white shadow-lg shadow-tsg-green/20 transition hover:bg-tsg-deep"
+                  className="group inline-flex items-center gap-2 rounded-full bg-tsg-green px-6 py-3 font-semibold text-white shadow-lg shadow-tsg-green/20 transition hover:bg-tsg-deep lg:px-7 lg:py-3.5"
                 >
                   {STORY.about.cta.label}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -229,29 +230,35 @@ function PinnedStory({ description, vision, mission }: ScrollStoryProps) {
               </p>
               <h2
                 data-blur
-                className="font-onest mt-5 text-[clamp(2.75rem,5.5vw,5rem)] font-normal uppercase leading-[0.92] tracking-[-0.03em] text-white"
+                className="font-onest mt-4 text-[clamp(2.25rem,8vw,5rem)] font-normal uppercase leading-[0.92] tracking-[-0.03em] text-white lg:mt-5 lg:text-[clamp(2.75rem,5.5vw,5rem)]"
               >
                 <HeadingLines text={STORY.leadership.heading} />
               </h2>
               <blockquote
                 data-blur
-                className="font-display mt-6 max-w-xl text-2xl font-light leading-snug text-white"
+                className="font-display mt-6 hidden max-w-xl text-2xl font-light leading-snug text-white lg:block"
               >
                 <Quote className="mb-2 h-8 w-8 text-white/40" aria-hidden="true" />
                 {STORY.leadership.quote}
               </blockquote>
-              <p data-blur className="mt-5 max-w-xl text-lg leading-relaxed text-white/80 line-clamp-3">
+              <p
+                data-blur
+                className="mt-4 max-w-xl text-base leading-relaxed text-white/80 line-clamp-3 lg:mt-5 lg:text-lg"
+              >
                 {vision || STORY.leadership.fallbackBody}
               </p>
               {mission && (
-                <p data-blur className="mt-3 max-w-xl text-base leading-relaxed text-white/70 line-clamp-2">
+                <p
+                  data-blur
+                  className="mt-3 hidden max-w-xl text-base leading-relaxed text-white/70 line-clamp-2 lg:block"
+                >
                   {mission}
                 </p>
               )}
-              <div data-blur className="mt-9">
+              <div data-blur className="mt-6 lg:mt-9">
                 <Link
                   href={STORY.leadership.cta.href}
-                  className="group inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 font-semibold text-tsg-green shadow-lg shadow-black/20 transition hover:bg-white/90"
+                  className="group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 font-semibold text-tsg-green shadow-lg shadow-black/20 transition hover:bg-white/90 lg:px-7 lg:py-3.5"
                 >
                   {STORY.leadership.cta.label}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

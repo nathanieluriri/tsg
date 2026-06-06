@@ -40,6 +40,18 @@ export function usePinProgress(
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(el);
-    return () => ro.disconnect();
+    // Native scroll fallback so touch devices keep updating even if Lenis isn't
+    // driving touch scroll (syncTouch is off in SmoothScroll); coalesced to one rAF.
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(measure);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+      window.removeEventListener('scroll', onScroll);
+    };
   }, [ref, measure]);
 }
