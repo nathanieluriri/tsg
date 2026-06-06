@@ -86,9 +86,12 @@ function PinnedStory({ description, vision, mission }: ScrollStoryProps) {
     if (topImageRef.current) {
       topImageRef.current.style.clipPath = `inset(0 0 ${(easeInOut(p) * 100).toFixed(2)}% 0)`;
     }
-    // Background cross-fade: cream (base) -> green (top layer) across the middle.
+    // Background flip: stay solid cream through the first half, then a quick, soft
+    // (eased) cream -> green change right at the A->B handover. The short window
+    // avoids the muddy half-blended in-between color dragging across the scroll,
+    // while still landing on green before the white Leadership text is readable.
     if (bgTopRef.current) {
-      bgTopRef.current.style.opacity = mapRange(p, 0.15, 0.85).toFixed(3);
+      bgTopRef.current.style.opacity = easeInOut(mapRange(p, 0.5, 0.62)).toFixed(3);
     }
     const { a, b } = segsRef.current;
     // Frame A (Who We Are) blurs/fades OUT over [0, 0.5]. Reverse the stagger
