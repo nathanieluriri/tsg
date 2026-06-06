@@ -75,7 +75,8 @@ export default function Hero({ images }: { images: string[] }) {
     if (typeof window === 'undefined') return;
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const played = sessionStorage.getItem(SESSION_KEY) === '1';
+    // const played = sessionStorage.getItem(SESSION_KEY) === '1';
+    const played=false;
     if (reduced || played) {
       setIntroDone(true);
       return;
