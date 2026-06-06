@@ -1,13 +1,5 @@
 import Link from 'next/link';
-import {
-  ArrowRight,
-  GraduationCap,
-  LineChart,
-  Landmark,
-  Users,
-  ChevronDown,
-  Newspaper,
-} from 'lucide-react';
+import { ArrowRight, Users, ChevronDown, Newspaper } from 'lucide-react';
 import { connectDB } from '@/lib/db';
 import { APP_NAME, APP_URL } from '@/lib/config';
 import { Slider } from '@/models/Slider';
@@ -21,10 +13,16 @@ import PostCard from '@/components/public/PostCard';
 import Hero from '@/components/public/home/Hero';
 import Reveal from '@/components/public/home/Reveal';
 import CountUp from '@/components/public/home/CountUp';
+import ScrollStory from '@/components/public/home/ScrollStory';
+import ImpactPrograms from '@/components/public/home/ImpactPrograms';
+import JourneyTimeline from '@/components/public/home/JourneyTimeline';
+import Voices from '@/components/public/home/Voices';
+import LocationMap from '@/components/public/home/LocationMap';
+import { getGalleryImages } from '@/lib/gallery';
 
 const FALLBACK_HERO_IMAGES = [
   '/assets/img/hero-carousel/hero-carousel-1.jpg',
-  '/assets/img/hero-carousel/tsg2.png',
+  '/assets/img/hero-carousel/hero-carousel-2.jpg',
   '/assets/img/hero-carousel/hero-carousel-3.jpg',
   '/assets/img/hero-carousel/tinubu1.png',
 ];
@@ -34,24 +32,6 @@ const STATS = [
   { value: 774, suffix: '', label: 'Local Governments', separator: true },
   { value: 6, suffix: '', label: 'Geopolitical Zones', separator: false },
   { value: 2019, suffix: '', label: 'Mobilising Since', separator: false },
-];
-
-const PILLARS = [
-  {
-    icon: GraduationCap,
-    title: 'Youth Empowerment',
-    body: 'Investing in education, skills and innovation so every young Nigerian can build a future at home.',
-  },
-  {
-    icon: LineChart,
-    title: 'Economic Growth',
-    body: 'Backing sustainable policies and enterprise that create jobs and lift families across the nation.',
-  },
-  {
-    icon: Landmark,
-    title: 'Inclusive Governance',
-    body: 'Championing transparency, accountability and citizen participation at every level of leadership.',
-  },
 ];
 
 export default async function HomePage() {
@@ -81,9 +61,16 @@ export default async function HomePage() {
         : null,
     )
     .filter((v): v is string => !!v);
-  // Burst sequence for the opening animation; the last image settles as the
-  // hero background. Use real slider images when present, else curated fallbacks.
-  const heroImages = (sliderImages.length >= 2 ? sliderImages : FALLBACK_HERO_IMAGES).slice(0, 4);
+  // Hero carousel + opening sequence imagery. Prefer the gallery photos, then
+  // DB sliders, then curated fallbacks. The Hero only mounts the current slide
+  // and its neighbours, so passing the full gallery stays cheap.
+  const gallery = getGalleryImages();
+  const heroImages =
+    gallery.length >= 2
+      ? gallery
+      : sliderImages.length >= 2
+        ? sliderImages
+        : FALLBACK_HERO_IMAGES;
 
   const sameAs = [setting.fbLink, setting.twLink, setting.igLink, setting.ytLink].filter(
     (v): v is string => typeof v === 'string' && v.length > 0,
@@ -138,7 +125,7 @@ export default async function HomePage() {
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-10 px-4 py-14 text-center sm:px-6 lg:grid-cols-4 lg:px-8">
           {STATS.map((s, i) => (
             <Reveal key={s.label} delay={i * 90}>
-              <div className="font-display text-4xl font-semibold text-tsg-gold md:text-5xl">
+              <div className="font-display text-4xl font-semibold text-white md:text-5xl">
                 <CountUp value={s.value} suffix={s.suffix} separator={s.separator} />
               </div>
               <div className="mt-2 text-xs uppercase tracking-[0.18em] text-white/65 sm:text-sm">
@@ -149,45 +136,28 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ------------------------------------------------------------- Pillars */}
-      <section className="bg-tsg-cream">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <Reveal className="max-w-2xl">
-            <p className="eyebrow">What We Stand For</p>
-            <h2 className="font-display mt-3 text-3xl font-semibold text-tsg-deep md:text-4xl">
-              The Renewed Hope Agenda
-            </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Three commitments guide everything we do as we mobilise Nigerians behind a
-              shared vision for the nation.
-            </p>
-          </Reveal>
+      {/* -------------------------------- About + Leadership (pinned scroll-story) */}
+      <ScrollStory
+        description={setting.description}
+        vision={setting.vision}
+        mission={setting.mission}
+      />
 
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {PILLARS.map((p, i) => (
-              <Reveal key={p.title} delay={i * 110}>
-                <article className="group relative h-full overflow-hidden rounded-2xl border border-black/5 bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
-                  <span className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-tsg-gold transition-transform duration-300 group-hover:scale-x-100" />
-                  <span className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-tsg-green/10 text-tsg-green ring-1 ring-tsg-green/15">
-                    <p.icon className="h-7 w-7" strokeWidth={1.75} />
-                  </span>
-                  <h3 className="font-display mt-6 text-xl font-semibold text-tsg-deep">
-                    {p.title}
-                  </h3>
-                  <p className="mt-3 text-gray-600">{p.body}</p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* -------------------------------------------------------------- Impact */}
+      <ImpactPrograms />
+
+      {/* ------------------------------------------------------------- Journey */}
+      <JourneyTimeline />
+
+      {/* -------------------------------------------------------------- Voices */}
+      <Voices />
 
       {/* ---------------------------------------------------------- Latest News */}
       <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <Reveal className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="eyebrow">From the Movement</p>
+              <p className="eyebrow text-tsg-green">From the Movement</p>
               <h2 className="font-display mt-3 text-3xl font-semibold text-tsg-deep md:text-4xl">
                 Latest News
               </h2>
@@ -247,13 +217,16 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ------------------------------------------------------------ Location */}
+      <LocationMap address={setting.address} phone={setting.phone} email={setting.email} />
+
       {/* ----------------------------------------------------------- CTA banner */}
       <section className="relative isolate overflow-hidden bg-tsg-green text-white">
-        <div className="absolute -right-24 -top-24 -z-10 h-80 w-80 rounded-full bg-tsg-gold/20 blur-3xl" />
-        <div className="absolute -bottom-24 -left-24 -z-10 h-80 w-80 rounded-full bg-tsg-gold/10 blur-3xl" />
+        <div className="absolute -right-24 -top-24 -z-10 h-80 w-80 rounded-full bg-white/10 blur-3xl" />
+        <div className="absolute -bottom-24 -left-24 -z-10 h-80 w-80 rounded-full bg-white/5 blur-3xl" />
         <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:px-8">
           <Reveal>
-            <p className="eyebrow justify-center text-tsg-gold-soft">Be Part Of It</p>
+            <p className="eyebrow justify-center text-white/75">Be Part Of It</p>
             <h2 className="font-display mt-4 text-3xl font-semibold leading-tight md:text-5xl">
               Add your voice to the movement
             </h2>
@@ -264,7 +237,7 @@ export default async function HomePage() {
             <div className="mt-9 flex flex-wrap justify-center gap-4">
               <Link
                 href="/register"
-                className="group inline-flex items-center gap-2 rounded-full bg-tsg-gold px-7 py-3.5 font-semibold text-tsg-deep shadow-lg shadow-black/20 transition hover:bg-tsg-gold-soft"
+                className="group inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 font-semibold text-tsg-green shadow-lg shadow-black/20 transition hover:bg-white/90"
               >
                 <Users className="h-4 w-4" />
                 Become a Member
@@ -286,7 +259,7 @@ export default async function HomePage() {
         <section className="bg-tsg-cream">
           <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
             <Reveal className="text-center">
-              <p className="eyebrow justify-center">Good To Know</p>
+              <p className="eyebrow justify-center text-tsg-green">Good To Know</p>
               <h2 className="font-display mt-3 text-3xl font-semibold text-tsg-deep md:text-4xl">
                 Frequently Asked Questions
               </h2>
