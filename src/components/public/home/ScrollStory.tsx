@@ -72,7 +72,7 @@ function HeadingLines({ text }: { text: string }) {
 
 function PinnedStory({ description, vision, mission }: ScrollStoryProps) {
   const wrapperRef = useRef<HTMLElement | null>(null);
-  const stripRef = useRef<HTMLDivElement | null>(null);
+  const topImageRef = useRef<HTMLDivElement | null>(null);
   const bgTopRef = useRef<HTMLDivElement | null>(null);
   const frameARef = useRef<HTMLDivElement | null>(null);
   const frameBRef = useRef<HTMLDivElement | null>(null);
@@ -80,9 +80,11 @@ function PinnedStory({ description, vision, mission }: ScrollStoryProps) {
 
   // Apply the current progress (0..1) imperatively -- no React re-render per frame.
   const apply = useCallback((p: number) => {
-    // Image filmstrip: 200%-tall stack slides up by one photo (eased so it settles).
-    if (stripRef.current) {
-      stripRef.current.style.transform = `translate3d(0, ${(-easeInOut(p) * 50).toFixed(3)}%, 0)`;
+    // Sticky image reveal: the base (second) image stays put while the top
+    // (first) image is clipped away from the bottom -- it looks "cut"/cleaned
+    // off in place rather than sliding, uncovering the stationary image beneath.
+    if (topImageRef.current) {
+      topImageRef.current.style.clipPath = `inset(0 0 ${(easeInOut(p) * 100).toFixed(2)}% 0)`;
     }
     // Background cross-fade: cream (base) -> green (top layer) across the middle.
     if (bgTopRef.current) {
@@ -152,27 +154,28 @@ function PinnedStory({ description, vision, mission }: ScrollStoryProps) {
         />
 
         <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
-          {/* Image column (LEFT): fixed frame; filmstrip scrubs between photos. */}
+          {/* Image column (LEFT): fixed frame. The top image is clipped away from
+              the bottom on scroll, uncovering the stationary ("sticky") base image
+              beneath -- a hard "cut" reveal, not a slide. */}
           <div className="relative h-[68svh] max-h-[40rem] w-full overflow-hidden rounded-[2rem] shadow-2xl shadow-tsg-deep/25">
-            <div ref={stripRef} className="absolute inset-x-0 top-0 h-[200%] will-change-transform">
-              <div className="relative h-1/2 w-full">
-                <Image
-                  src="/assets/img/tinubu2.jpg"
-                  alt="President Bola Ahmed Tinubu"
-                  fill
-                  sizes="(max-width: 1024px) 90vw, 45vw"
-                  className="object-cover object-top"
-                />
-              </div>
-              <div className="relative h-1/2 w-full">
-                <Image
-                  src="/assets/img/blog/presidentbola.jpg"
-                  alt="President Bola Ahmed Tinubu"
-                  fill
-                  sizes="(max-width: 1024px) 90vw, 45vw"
-                  className="object-cover object-center"
-                />
-              </div>
+            {/* Base image (revealed) -- stays put beneath the top image. */}
+            <Image
+              src="/assets/img/blog/presidentbola.jpg"
+              alt="President Bola Ahmed Tinubu"
+              fill
+              sizes="(max-width: 1024px) 90vw, 45vw"
+              className="object-cover object-center"
+            />
+            {/* Top image (cut away) -- clip-path shrinks it from the bottom as
+                progress grows, uncovering the base image. Stays in place. */}
+            <div ref={topImageRef} className="absolute inset-0" style={{ willChange: 'clip-path' }}>
+              <Image
+                src="/assets/img/tinubu2.jpg"
+                alt="President Bola Ahmed Tinubu"
+                fill
+                sizes="(max-width: 1024px) 90vw, 45vw"
+                className="object-cover object-top"
+              />
             </div>
           </div>
 
