@@ -8,14 +8,13 @@ export default {
         tsg: {
           green: '#0a4d2e',
           deep: '#063d23',
-          gold: '#c9a14a',
-          'gold-soft': '#e6cf94',
           cream: '#f7f4ec',
         },
       },
       fontFamily: {
         display: ['var(--font-display)', 'Georgia', 'serif'],
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        onest: ['var(--font-onest)', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
       },
       maxWidth: {
         '8xl': '88rem',

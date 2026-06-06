@@ -32,7 +32,7 @@ export default function Footer({ setting }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-[var(--tsg-gold)] hover:text-gray-900"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white hover:text-[var(--tsg-green)]"
                 >
                   <Icon className="h-4 w-4" />
                 </a>

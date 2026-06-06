@@ -39,7 +39,7 @@ export default function SubscribeForm() {
         placeholder="you@example.com"
         className="w-full px-3 py-2 rounded text-gray-900"
       />
-      <button disabled={loading} className="w-full bg-[var(--tsg-gold)] text-gray-900 font-medium py-2 rounded disabled:opacity-50">
+      <button disabled={loading} className="w-full bg-white text-[var(--tsg-green)] font-semibold py-2 rounded transition hover:bg-white/90 disabled:opacity-50">
         {loading ? '…' : 'Subscribe'}
       </button>
       {msg && <p className="text-xs">{msg}</p>}

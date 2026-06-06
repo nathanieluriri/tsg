@@ -1,0 +1,266 @@
+- generic [active] [ref=e1]:
+  - link "Skip to main content" [ref=e2] [cursor=pointer]:
+    - /url: "#top"
+  - generic [ref=e5]:
+    - img [ref=e6]
+    - img [ref=e8]
+    - img [ref=e10]
+  - generic [ref=e12]:
+    - banner [ref=e13]:
+      - generic [ref=e16]:
+        - link "Открыть меню" [ref=e17] [cursor=pointer]:
+          - /url: "#menu"
+          - generic [ref=e19]:
+            - img
+        - link "Favorites" [ref=e20] [cursor=pointer]:
+          - /url: "#favourites"
+          - generic [ref=e23]:
+            - img
+        - link "Choose an office" [ref=e24] [cursor=pointer]:
+          - /url: /offices
+          - generic [ref=e25]:
+            - generic [ref=e26]: Choose an office
+            - generic [ref=e27]:
+              - img
+    - generic [ref=e29]:
+      - main [ref=e30]:
+        - generic:
+          - generic:
+            - generic:
+              - img
+              - img
+              - img
+        - generic [ref=e31]:
+          - heading "AIR — A Premium Class A Business Center on Khodynka Field by Tekta Group" [level=1] [ref=e32]
+          - generic [ref=e33]:
+            - iframe [ref=e36]:
+              
+            - generic [ref=e37]:
+              - generic:
+                - paragraph [ref=e39]:
+                  - text: The architecture
+                  - text: of New Success
+                - paragraph [ref=e41]:
+                  - text: Class (A)
+                  - text: premium business
+                  - text: center
+              - link "The momentum to rise higher" [ref=e43] [cursor=pointer]:
+                - /url: "#impulse"
+                - generic [ref=e45]:
+                  - img
+        - generic [ref=e46]:
+          - generic [ref=e48]:
+            - heading "The momentum to rise higher" [level=2]:
+              - generic: The momentum
+              - generic: to rise higher
+            - paragraph:
+              - text: AIR is a new generation of offices that
+              - text: brings a new level of premium quality and
+              - text: style to Class A business real estate.
+          - generic [ref=e56]:
+            - paragraph: Efficient layouts and premium infrastructure, panoramic glazing and impressive views, luxurious lobbies, and forward-looking faсades set a new benchmark for business environment.
+            - paragraph:
+              - text: At this level,
+              - text: AIR has no competitors.
+            - link "About the project" [ref=e59] [cursor=pointer]:
+              - /url: /about
+              - generic [ref=e60]:
+                - generic [ref=e61]: About the project
+                - generic [ref=e62]:
+                  - img
+        - generic:
+          - generic:
+            - heading "A new premium format" [level=2]:
+              - generic: A new
+              - generic: premium
+              - generic: format
+            - paragraph:
+              - text: AIR is not only a new generation of
+              - text: offices but also a strong architectural
+              - text: statement by ADM architects.
+          - generic:
+            - iframe [ref=e63]:
+              
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - paragraph: Three towers ranging from 14 to 34 floors reflect the dynamic character of office life through their expressive forms. They symbolize one of the capital’s key business districts
+              - generic:
+                - paragraph: 1 / 2
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic:
+                            - heading "An intelligent harmony of curved glass and radiant metal" [level=2]
+                          - generic:
+                            - link "About the project":
+                              - /url: /about
+                              - generic:
+                                - generic: About the project
+                                - generic:
+                                  - img
+        - generic:
+          - generic:
+            - heading "At the center At the heart of business of life" [level=2]:
+              - generic: At the center
+              - generic:
+                - text: At the heart
+                - text: of business
+              - generic: of life
+            - generic:
+              - generic:
+                - paragraph: The premium AIR business center is designed to become a symbol the City — a large-scale area spanning one of the city’s primary business districts.
+              - generic:
+                - paragraph: Through gentrification — the transformation of underutilized urban areas into a vibrant district of the future that concentrates the city’s business energy, with AIR becoming the main beneficiary of these changes.
+                - generic:
+                  - generic:
+                    - link "Location":
+                      - /url: /location
+                      - generic:
+                        - generic: Location
+                        - generic:
+                          - img
+            - generic:
+              - iframe [ref=e64]:
+                
+              - list:
+                - listitem:
+                  - generic:
+                    - generic: "1"
+                    - generic:
+                      - text: min
+                      - text: walk
+                    - generic: Mall
+                - listitem:
+                  - generic:
+                    - generic: "3"
+                    - generic:
+                      - text: min
+                      - text: walk
+                    - generic: Metro Station
+                - listitem:
+                  - generic:
+                    - generic: "7"
+                    - generic:
+                      - text: min
+                      - text: drive
+                    - generic: Downtown
+                - listitem:
+                  - generic:
+                    - generic: "11"
+                    - generic:
+                      - text: min
+                      - text: drive
+                    - generic: Highway
+            - generic:
+              - generic:
+                - paragraph: The prime location ensures a healthy work–life balance for employees and top management working at AIR. The development of the downtown allows them to enjoy the best the capital has to offer without leaving their preferred district.
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic:
+                        - link "Interactive map":
+                          - /url: /location#map
+                          - generic:
+                            - generic: Interactive map
+                            - generic:
+                              - img
+        - generic [ref=e65]:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - heading "Business center Designed with people in mind" [level=2]:
+                    - generic: Business center
+                    - generic: Designed with
+                    - generic: people in mind
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - paragraph: AIR celebrates freedom and self-sufficiency. The architects chose not to connect the towers with a shared podium level, creating cozy open courtyards instead.
+            - generic:
+              - generic:
+                - generic:
+                  - paragraph:
+                    - text: Employees can hold informal meetings on cafe terraces
+                    - text: or relax outdoors during lunch breaks, while employers
+                    - text: gain an additional tool to improve team productivity.
+        - generic [ref=e66]:
+          - generic:
+            - generic:
+              - heading "A tangible sense of status" [level=2]:
+                - generic: A tangible sense
+                - generic: of status
+              - generic:
+                - paragraph:
+                  - text: The facades of AIR resemble frozen waves.
+                  - text: HAAST Bureau continuing this elemental
+                  - text: metaphor in the lobby design.
+              - generic [ref=e72]:
+                - paragraph [ref=e78]:
+                  - generic [ref=e79]: "1"
+                  - generic [ref=e80]: / 2
+                - generic [ref=e82]:
+                  - generic:
+                    - paragraph: Glass wave forms on the ceilings make the interior a continuation of the architecture. Ceilings up to eight meters high, supported by unique inclined columns, give the lobby a sense of lightness and monumentality.
+                - link "Learn more" [ref=e88] [cursor=pointer]:
+                  - /url: /about
+                  - generic [ref=e89]:
+                    - generic [ref=e90]: Learn more
+                    - generic [ref=e91]:
+                      - img
+              - generic:
+                - generic:
+                  - generic:
+                    - paragraph:
+                      - text: Choose
+                      - generic: an office
+                  - generic:
+                    - link "By parameters":
+                      - /url: /offices
+                      - generic:
+                        - generic: By parameters
+                        - generic:
+                          - img
+                  - generic:
+                    - link "On the master plan":
+                      - /url: /visual-search
+                      - generic:
+                        - generic: On the master plan
+                        - generic:
+                          - img
+                  - generic:
+                    - paragraph: an office
+      - contentinfo:
+        - generic:
+          - generic:
+            - generic:
+              - img "AIR"
+            - generic:
+              - paragraph: © 2026 Tekta group
+              - link "Website by Vide Infra":
+                - /url: https://videinfra.com/luxury-real-estate-website-design-agency
+          - paragraph: ANY INFORMATION PROVIDED ON THIS WEBSITE IS FOR INFORMATIONAL PURPOSES ONLY AND UNDER NO CIRCUMSTANCES CONSTITUTES A PUBLIC OFFER. THE FINISHED PROPERTIES MAY DIFFER FROM THE 3D VISUALISATIONS PRESENTED. ALL MATERIALS PRESENTED ARE FOR GUIDANCE ONLY AND ARE SUBJECT TO CHANGE. ALL PHOTOGRAPHS BELONG TO THEIR RESPECTIVE OWNERS AND ARE USED FOR DEMONSTRATION PURPOSES. PLEASE DO NOT USE THE CONTENT POSTED HERE FOR COMMERCIAL PURPOSES.
+  - dialog "Cookie consent":
+    - generic [ref=e93]:
+      - paragraph [ref=e94]:
+        - text: This website uses
+        - link "Learn more about cookies" [ref=e95] [cursor=pointer]:
+          - /url: /privacy-policy
+          - generic [ref=e97]: cookies
+      - button "Accept all cookies" [ref=e98] [cursor=pointer]:
+        - generic [ref=e100]: Accept

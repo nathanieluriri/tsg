@@ -49,45 +49,52 @@ function buildIco(entries) {
   return Buffer.concat([header, dir, ...blobs]);
 }
 
+// Green/white scrim + copy painted over a photo. Left side stays legible; the
+// photo breathes on the right. A white circle (top-right) hosts the logo.
 function ogSvg() {
   return Buffer.from(`<?xml version="1.0" encoding="UTF-8"?>
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#063d23"/>
-      <stop offset="0.55" stop-color="#0a4d2e"/>
-      <stop offset="1" stop-color="#0c5a36"/>
+    <linearGradient id="scrim" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#063d23" stop-opacity="0.96"/>
+      <stop offset="0.55" stop-color="#0a4d2e" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#0a4d2e" stop-opacity="0.18"/>
     </linearGradient>
-    <radialGradient id="glow" cx="0.85" cy="0.18" r="0.6">
-      <stop offset="0" stop-color="#c9a14a" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#c9a14a" stop-opacity="0"/>
-    </radialGradient>
+    <linearGradient id="vert" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#063d23" stop-opacity="0.45"/>
+      <stop offset="0.5" stop-color="#063d23" stop-opacity="0"/>
+      <stop offset="1" stop-color="#063d23" stop-opacity="0.8"/>
+    </linearGradient>
   </defs>
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#scrim)"/>
+  <rect width="1200" height="630" fill="url(#vert)"/>
   <!-- eyebrow -->
-  <rect x="80" y="92" width="48" height="5" rx="2.5" fill="#c9a14a"/>
-  <text x="142" y="102" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="5" fill="#e6cf94">TINUBU SUPPORT GROUP</text>
+  <rect x="80" y="118" width="46" height="4" rx="2" fill="#ffffff"/>
+  <text x="138" y="128" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="5" fill="#ffffff">TINUBU SUPPORT GROUP</text>
   <!-- headline -->
-  <text x="78" y="232" font-family="Georgia, 'Times New Roman', serif" font-size="80" font-weight="700" fill="#ffffff">Renewed Hope.</text>
-  <text x="78" y="326" font-family="Georgia, 'Times New Roman', serif" font-size="80" font-weight="700" fill="#c9a14a">Stronger Nigeria.</text>
-  <text x="80" y="392" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="400" fill="#dfeee5">Join the movement for a better Nigeria.</text>
-  <!-- badge ring for the logo (logo composited on top in code) -->
-  <circle cx="1058" cy="288" r="116" fill="#f7f4ec"/>
-  <circle cx="1058" cy="288" r="126" fill="none" stroke="#c9a14a" stroke-width="6"/>
-  <!-- bottom flag rule -->
-  <rect x="0" y="600" width="600" height="30" fill="#0a4d2e"/>
-  <rect x="600" y="600" width="600" height="30" fill="#c9a14a"/>
-  <text x="80" y="556" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="600" letter-spacing="2" fill="#9fc4ad">tinubusupportgroup.com</text>
+  <text x="78" y="262" font-family="Georgia, 'Times New Roman', serif" font-size="82" font-weight="700" fill="#ffffff">Renewed Hope.</text>
+  <text x="78" y="354" font-family="Georgia, 'Times New Roman', serif" font-size="82" font-weight="400" font-style="italic" fill="#ffffff">Stronger Nigeria.</text>
+  <!-- supporting -->
+  <text x="80" y="416" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#e7f2ea">A nationwide movement for a stronger Nigeria.</text>
+  <!-- url -->
+  <text x="80" y="548" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="600" letter-spacing="1.5" fill="#bcd6c6">tinubusupportgroup.com</text>
+  <!-- white logo badge (logo composited on top in code) -->
+  <circle cx="1078" cy="140" r="74" fill="#ffffff"/>
 </svg>`);
 }
 
 async function makeOg(logo) {
-  const badge = await sharp(logo)
-    .resize(176, 176, { fit: 'inside' })
+  const W = 1200;
+  const H = 630;
+  const photo = await sharp(join(ROOT, 'public/assets/img/hero-carousel/tinubu1.png'))
+    .resize(W, H, { fit: 'cover', position: 'top' })
     .toBuffer();
-  return sharp(ogSvg())
-    .composite([{ input: badge, top: 288 - 88, left: 1058 - 88 }])
+  const badge = await sharp(logo).resize(98, 98, { fit: 'inside' }).toBuffer();
+  return sharp(photo)
+    .composite([
+      { input: ogSvg(), top: 0, left: 0 },
+      { input: badge, top: 140 - 49, left: 1078 - 49 },
+    ])
     .png()
     .toBuffer();
 }

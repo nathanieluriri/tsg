@@ -1,0 +1,405 @@
+[    2595ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[  473284ms] [WARNING] Image with src "/gallery/IMG_6860_SXR~1.jpg" has "fill" prop and "sizes" prop of "100vw", but image is not rendered at full viewport width. Please adjust "sizes" to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/utils/warn-once.js:15
+[  662412ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  663036ms] [LOG] [Fast Refresh] done in 626ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  684829ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  685204ms] [LOG] [Fast Refresh] done in 374ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  690636ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  691135ms] [LOG] [Fast Refresh] done in 500ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  706443ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  706816ms] [LOG] [Fast Refresh] done in 373ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  706858ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  707252ms] [ERROR] ./src/components/public/home/LeadershipVision.tsx
+Error:   × Unexpected character '”'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                          ▲
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+  × Expected '</', got 'eyebrow'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                           ───────
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/public/home/LeadershipVision.tsx
+./src/app/(public)/page.tsx @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[  707292ms] [LOG] {file: Object} @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/next-devtools/index.js:1630
+[  717924ms] [LOG] [Fast Refresh] done in 11065ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  718402ms] [LOG] [Fast Refresh] done in 11544ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  719017ms] [ERROR] ./src/components/public/home/LeadershipVision.tsx
+Error:   × Unexpected character '”'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                          ▲
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+  × Expected '</', got 'eyebrow'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                           ───────
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/public/home/LeadershipVision.tsx
+./src/app/(public)/page.tsx @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[  719022ms] [LOG] {file: Object} @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/next-devtools/index.js:1630
+[  721045ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/?_rsc=sMhRpPM36TYL7jtT:0
+[  721474ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/?_rsc=sMhRpPM36TYL7jtT:0
+[  721552ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/?_rsc=sMhRpPM36TYL7jtT:0
+[  721716ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  722258ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(pages-dir-browser)/./node_modules/react-dom/cjs/react-dom-client.development.js:24594
+[  722475ms] ModuleBuildError: Module build failed (from ./node_modules/next/dist/build/webpack/loaders/next-swc-loader.js):
+Error:   × Unexpected character '”'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                          ▲
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+  × Expected '</', got 'eyebrow'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                           ───────
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+
+
+Caused by:
+    Syntax Error
+    at processResult (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\webpack\bundle5.js:29:407086)
+    at <unknown> (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\webpack\bundle5.js:29:408881)
+    at <unknown> (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\loader-runner\LoaderRunner.js:1:8645)
+    at <unknown> (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\loader-runner\LoaderRunner.js:1:5019)
+    at r.callback (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\loader-runner\LoaderRunner.js:1:4039)
+[  722461ms] [LOG] [HMR] connected @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/websocket.js:45
+[  722465ms] [ERROR] ./src/components/public/home/LeadershipVision.tsx
+Error:   × Unexpected character '”'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                          ▲
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+  × Expected '</', got 'eyebrow'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                           ───────
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+
+Caused by:
+    Syntax Error @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:76
+[  722548ms] [LOG] {file: Object} @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/compiled/next-devtools/index.js:1630
+[  870571ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/_next/static/webpack/935f3cacb970e4c6.webpack.hot-update.json:0
+[  870572ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/hot-reloader-pages.js:347
+[  873595ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/hot-reloader-pages.js:206
+[  873650ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/_next/static/webpack/935f3cacb970e4c6.webpack.hot-update.json:0
+[  873651ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/hot-reloader-pages.js:347
+[  875269ms] [ERROR] ./src/components/public/home/LeadershipVision.tsx
+Error:   × Unexpected character '”'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                          ▲
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+  × Expected '</', got 'eyebrow'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                           ───────
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/public/home/LeadershipVision.tsx
+./src/app/(public)/page.tsx @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:76
+[  875286ms] [LOG] {file: Object} @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/compiled/next-devtools/index.js:1630
+[  875392ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/_next/static/webpack/935f3cacb970e4c6.webpack.hot-update.json:0
+[  875393ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/hot-reloader-pages.js:347
+[  875653ms] [ERROR] ./src/components/public/home/LeadershipVision.tsx
+Error:   × Unexpected character '”'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                          ▲
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+  × Expected '</', got 'eyebrow'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                           ───────
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/public/home/LeadershipVision.tsx
+./src/app/(public)/page.tsx @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:76
+[  876479ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  877025ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(pages-dir-browser)/./node_modules/react-dom/cjs/react-dom-client.development.js:24594
+[  877086ms] ModuleBuildError: Module build failed (from ./node_modules/next/dist/build/webpack/loaders/next-swc-loader.js):
+Error:   × Unexpected character '”'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                          ▲
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+  × Expected '</', got 'eyebrow'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                           ───────
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+
+
+Caused by:
+    Syntax Error
+    at processResult (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\webpack\bundle5.js:29:407086)
+    at <unknown> (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\webpack\bundle5.js:29:408881)
+    at <unknown> (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\loader-runner\LoaderRunner.js:1:8645)
+    at <unknown> (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\loader-runner\LoaderRunner.js:1:5019)
+    at r.callback (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\loader-runner\LoaderRunner.js:1:4039)
+[  877085ms] [LOG] [HMR] connected @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/websocket.js:45
+[  877091ms] [ERROR] ./src/components/public/home/LeadershipVision.tsx
+Error:   × Unexpected character '”'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                          ▲
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+  × Expected '</', got 'eyebrow'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                           ───────
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+
+Caused by:
+    Syntax Error @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:76
+[  877175ms] [LOG] {file: Object} @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/compiled/next-devtools/index.js:1630
+[  877258ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/_next/static/webpack/935f3cacb970e4c6.webpack.hot-update.json:0
+[  877259ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/hot-reloader-pages.js:347
+[  878343ms] [ERROR] ./src/components/public/home/LeadershipVision.tsx
+Error:   × Unexpected character '”'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                          ▲
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+  × Expected '</', got 'eyebrow'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                           ───────
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/public/home/LeadershipVision.tsx
+./src/app/(public)/page.tsx @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:76
+[  878346ms] [LOG] {file: Object} @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/compiled/next-devtools/index.js:1630
+[  878582ms] [ERROR] ./src/components/public/home/LeadershipVision.tsx
+Error:   × Unexpected character '”'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                          ▲
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+  × Expected '</', got 'eyebrow'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                           ───────
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./src/components/public/home/LeadershipVision.tsx
+./src/app/(public)/page.tsx @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:76
+[  878667ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/favicon.ico:0
+[  878706ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  878974ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(pages-dir-browser)/./node_modules/react-dom/cjs/react-dom-client.development.js:24594
+[  879000ms] ModuleBuildError: Module build failed (from ./node_modules/next/dist/build/webpack/loaders/next-swc-loader.js):
+Error:   × Unexpected character '”'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                          ▲
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+  × Expected '</', got 'eyebrow'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                           ───────
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+
+
+Caused by:
+    Syntax Error
+    at processResult (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\webpack\bundle5.js:29:407086)
+    at <unknown> (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\webpack\bundle5.js:29:408881)
+    at <unknown> (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\loader-runner\LoaderRunner.js:1:8645)
+    at <unknown> (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\loader-runner\LoaderRunner.js:1:5019)
+    at r.callback (file://C:\Users\Mr Dashi\Downloads\tsg_repo\node_modules\next\dist\compiled\loader-runner\LoaderRunner.js:1:4039)
+[  879000ms] [LOG] [HMR] connected @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/websocket.js:45
+[  879004ms] [ERROR] ./src/components/public/home/LeadershipVision.tsx
+Error:   × Unexpected character '”'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                          ▲
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+  × Expected '</', got 'eyebrow'
+    ╭─[C:\Users\Mr Dashi\Downloads\tsg_repo\src\components\public\home\LeadershipVision.tsx:40:1]
+ 37 │         {/* Text */}
+ 38 │         <div>
+ 39 │           <Reveal>
+ 40 │             <p className=”eyebrow text-white/70”>{STORY.leadership.eyebrow}</p>
+    ·                           ───────
+ 41 │           </Reveal>
+ 42 │           <SplitText
+ 43 │             as=”h2”
+    ╰────
+
+Caused by:
+    Syntax Error @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/next-devtools/userspace/pages/pages-dev-overlay-setup.js:76
+[  879026ms] [LOG] {file: Object} @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/compiled/next-devtools/index.js:1630
+[  879052ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/favicon.ico:0
+[  951665ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/hot-reloader-pages.js:206
+[  951693ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/_next/static/webpack/935f3cacb970e4c6.webpack.hot-update.json:0
+[  951693ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/hot-reloader-pages.js:347
+[  953819ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/_next/static/webpack/935f3cacb970e4c6.webpack.hot-update.json:0
+[  953820ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/hot-reloader-pages.js:347
+[  959437ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[ 1073006ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1076423ms] [LOG] [Fast Refresh] done in 3416ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13

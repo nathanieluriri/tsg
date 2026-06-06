@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, Public_Sans } from 'next/font/google';
+import { Fraunces, Public_Sans, Onest } from 'next/font/google';
 import { APP_NAME, APP_URL } from '@/lib/config';
 import './globals.css';
 
@@ -18,8 +18,17 @@ const sans = Public_Sans({
   display: 'swap',
 });
 
+// Onest — geometric sans used for the aircenter-style scroll-crossfade sections
+// (large, tight, uppercase). Exposed as --font-onest.
+const onest = Onest({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-onest',
+  display: 'swap',
+});
+
 const DESCRIPTION =
-  'Tinubu Support Group (TSG) is a nationwide movement standing with President Bola Ahmed Tinubu to advance the Renewed Hope agenda — youth empowerment, economic growth and inclusive governance for a stronger Nigeria. Join us.';
+  'Stand with President Bola Ahmed Tinubu. The Tinubu Support Group is a nationwide grassroots movement advancing the Renewed Hope agenda — youth empowerment, economic growth and inclusive governance. Join Nigerians across all 36 states and the FCT in building a stronger nation.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
@@ -97,7 +106,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable}`}>
+    <html lang="en" className={`${display.variable} ${sans.variable} ${onest.variable}`}>
       <body suppressHydrationWarning>
         {/* Progressive enhancement: if JS is disabled the scroll-reveal
             observer never runs, so make revealed content visible by default. */}

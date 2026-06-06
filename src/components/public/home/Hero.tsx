@@ -1,32 +1,25 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import {
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { useScrollLock } from '../scroll/ScrollLock';
 import { TSG_LOGO } from './tsgLogoPaths';
 
-// useLayoutEffect on the client (so the preloader is armed before first paint),
+// useLayoutEffect on the client (arm the preloader before first paint),
 // useEffect on the server to avoid the SSR warning.
 const useIsoLayoutEffect =
   typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
 const SESSION_KEY = 'tsg-intro-played';
+const SLIDE_MS = 5500;
 
-// Each photo starts at its own small size (front-most smallest) so they're
-// nested from the first frame, then burst out one-by-one; the last grows to
-// full-bleed and hands off to the hero background.
+// Opening burst: a few photos nested smallest-in-front, bursting out one by one.
 const START_SCALES = [0.5, 0.04, 0.008, 0.0015];
 const END_SCALES = [0.62, 0.72, 0.82, 0.92];
-const REVEAL_BEAT = 0.22; // seconds each photo holds before the next bursts out
+const REVEAL_BEAT = 0.22;
 
 function LogoTrace() {
   return (
@@ -47,15 +40,36 @@ function LogoTrace() {
 }
 
 export default function Hero({ images }: { images: string[] }) {
-  const frames = images.length ? images : ['/assets/img/hero-carousel/tinubu1.png'];
-  const heroBg = frames[frames.length - 1];
+  const slides = images.length ? images : ['/assets/img/hero-carousel/tinubu1.png'];
+  const len = slides.length;
+
+  // Burst frames: a handful of photos that ends on slide 0, so the hand-off
+  // into the carousel (which opens on slide 0) is seamless.
+  const first = slides[0] as string;
+  const burst = len <= 1 ? slides : [...slides.slice(1, Math.min(4, len)), first];
+
+  const [current, setCurrent] = useState(0);
+  const [introDone, setIntroDone] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   const rootRef = useRef<HTMLDivElement>(null);
-  const counterRef = useRef<HTMLSpanElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
-  const [introDone, setIntroDone] = useState(false);
 
   useScrollLock('opening-sequence', !introDone);
+
+  const next = useCallback(() => setCurrent((c) => (c + 1) % len), [len]);
+  const prev = useCallback(() => setCurrent((c) => (c - 1 + len) % len), [len]);
+
+  // Only mount the active slide and its immediate (circular) neighbours, so the
+  // carousel can cycle dozens of large photos while loading just a few.
+  const inWindow = useCallback(
+    (i: number) => {
+      if (len <= 1) return true;
+      const d = Math.min((i - current + len) % len, (current - i + len) % len);
+      return d <= 1;
+    },
+    [current, len],
+  );
 
   useIsoLayoutEffect(() => {
     if (typeof window === 'undefined') return;
@@ -80,64 +94,54 @@ export default function Hero({ images }: { images: string[] }) {
 
       const preloader = q('.opening-preloader');
       const logo = q('.opening-logo');
-      const counterWrap = q('.opening-counter');
       const trace = qa('.opening-trace');
       const reveal = q('.opening-reveal');
       const frameEl = q('.opening-frame');
-      const frameImgs = qa('.opening-frame img');
-      const lines = qa('.hero-line-inner');
+      const frameSlides = qa('.opening-frame-slide');
+      const words = qa('.hero-word');
       const eyebrow = q('.hero-eyebrow');
+      const divider = q('.hero-divider');
       const sub = q('.hero-sub');
       const cta = q('.hero-cta');
-      const cue = q('.hero-scroll');
+      const controls = q('.hero-controls');
 
-      // initial states
-      gsap.set([logo, counterWrap], { autoAlpha: 0, y: 16 });
-      gsap.set(trace, { strokeDashoffset: 1 });
+      gsap.set(logo, { autoAlpha: 0, y: 14, scale: 0.985 });
+      gsap.set(trace, { strokeDashoffset: 1, autoAlpha: 0 });
       gsap.set(reveal, { autoAlpha: 1 });
-      gsap.set(frameImgs, {
+      gsap.set(frameSlides, {
         autoAlpha: 1,
         scale: (i: number) => START_SCALES[i] ?? 0.01,
         transformOrigin: '50% 50%',
       });
-      gsap.set(lines, { yPercent: 120 });
-      gsap.set([eyebrow, sub, cta], { autoAlpha: 0, y: 18 });
-      gsap.set(cue, { autoAlpha: 0 });
+      gsap.set(words, { yPercent: 120 });
+      gsap.set(divider, { scaleX: 0 });
+      gsap.set([eyebrow, sub, cta, controls], { autoAlpha: 0, y: 18 });
 
-      const counter = { v: 0 };
-      const setCount = () => {
-        if (counterRef.current) {
-          counterRef.current.textContent = String(Math.round(counter.v));
-        }
-      };
-      setCount();
-
-      const last = frameImgs.length - 1;
+      const last = frameSlides.length - 1;
+      const lastSlide = frameSlides[last];
+      if (!lastSlide) {
+        setIntroDone(true);
+        return;
+      }
       const tl = gsap.timeline({ onComplete: () => setIntroDone(true) });
       tlRef.current = tl;
 
       tl
-        // 1. preloader content in
-        .to([logo, counterWrap], {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.7,
-          ease: 'power2.out',
-        })
-        // 2. count up + draw the logo on, in lockstep
-        .to(counter, { v: 99, duration: 2.5, ease: 'power1.inOut', onUpdate: setCount }, '<')
+        // 1. logo fades in, then draws on — fine stroke, smooth ease, gentle stagger
+        .to(logo, { autoAlpha: 1, y: 0, scale: 1, duration: 0.8, ease: 'power3.out' })
+        .to(trace, { autoAlpha: 1, duration: 0.3 }, '<')
         .to(
           trace,
-          { strokeDashoffset: 0, duration: 2.4, ease: 'power1.inOut', stagger: 0.12 },
+          { strokeDashoffset: 0, duration: 2.8, ease: 'power2.inOut', stagger: 0.07 },
           '<',
         )
-        // 3. preloader out
-        .to([logo, counterWrap], { autoAlpha: 0, y: -16, duration: 0.5, ease: 'power2.in' }, '+=0.25')
-        .to(preloader, { autoAlpha: 0, duration: 0.6 }, '-=0.2')
-        // 4. photos burst out one after another
+        // 2. logo out
+        .to(logo, { autoAlpha: 0, y: -12, duration: 0.55, ease: 'power2.in' }, '+=0.35')
+        .to(preloader, { autoAlpha: 0, duration: 0.6 }, '-=0.25')
+        // 3. photos burst out one after another
         .addLabel('rev', '-=0.3')
         .to(
-          frameImgs,
+          frameSlides,
           {
             scale: (i: number) => END_SCALES[i] ?? 0.9,
             duration: 1.5,
@@ -146,32 +150,27 @@ export default function Hero({ images }: { images: string[] }) {
           },
           'rev',
         )
-        // last photo fills the screen; its frame expands; the rest fade behind it
         .to(
-          frameImgs[last],
+          lastSlide,
           { scale: 1, duration: 1.3, ease: 'power2.inOut', overwrite: 'auto' },
-          `rev+=${(REVEAL_BEAT * frameImgs.length).toFixed(3)}`,
+          `rev+=${(REVEAL_BEAT * frameSlides.length).toFixed(3)}`,
         )
         .to(
           frameEl,
           { width: '100vw', height: '100svh', borderRadius: 0, duration: 1.3, ease: 'power2.inOut' },
           '<',
         )
-        .to(
-          frameImgs.slice(0, last),
-          { autoAlpha: 0, duration: 0.8, ease: 'power2.in' },
-          '<',
-        )
-        // 5. hand off to the real hero behind the overlay
-        .to(reveal, { autoAlpha: 0, duration: 0.7, ease: 'power2.inOut' }, '+=0.15')
-        // 6. hero content writes itself in
-        .to(eyebrow, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.35')
-        .to(lines, { yPercent: 0, duration: 1.0, ease: 'power4.out', stagger: 0.12 }, '-=0.4')
-        .to(sub, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+        .to(frameSlides.slice(0, last), { autoAlpha: 0, duration: 0.8, ease: 'power2.in' }, '<')
+        // 4. hand off to the hero carousel beneath the overlay
+        .to(reveal, { autoAlpha: 0, duration: 0.8, ease: 'power2.inOut' }, '+=0.15')
+        // 5. hero content writes itself in
+        .to(eyebrow, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4')
+        .to(words, { yPercent: 0, duration: 0.9, ease: 'power4.out', stagger: 0.08 }, '-=0.4')
+        .to(divider, { scaleX: 1, duration: 0.7, ease: 'power3.out' }, '-=0.5')
+        .to(sub, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.55')
         .to(cta, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.5')
-        .to(cue, { autoAlpha: 1, duration: 0.6 }, '-=0.3');
+        .to(controls, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4');
 
-      // Failsafe: never lock the page if the timeline stalls.
       const failSafe = window.setTimeout(
         () => setIntroDone(true),
         (tl.duration() + 4) * 1000,
@@ -182,17 +181,19 @@ export default function Hero({ images }: { images: string[] }) {
     return () => ctx.revert();
   }, []);
 
-  // Persist "played" once the intro finishes (or is skipped).
   useEffect(() => {
     if (introDone && typeof window !== 'undefined') {
       sessionStorage.setItem(SESSION_KEY, '1');
     }
   }, [introDone]);
 
-  const skip = () => {
-    if (tlRef.current) tlRef.current.progress(1);
-    else setIntroDone(true);
-  };
+  // Carousel autoplay (after the intro, when not paused / reduced-motion).
+  useEffect(() => {
+    if (!introDone || len < 2 || paused) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const id = window.setInterval(() => setCurrent((c) => (c + 1) % len), SLIDE_MS);
+    return () => window.clearInterval(id);
+  }, [introDone, paused, len, current]);
 
   return (
     <div ref={rootRef}>
@@ -205,47 +206,61 @@ export default function Hero({ images }: { images: string[] }) {
         id="hero"
         className="hero relative isolate flex min-h-[100svh] items-center overflow-hidden bg-tsg-deep text-white"
         aria-label="Renewed Hope. Stronger Nigeria."
+        style={{ ['--slide-dur' as string]: `${SLIDE_MS}ms` }}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
       >
+        {/* carousel + overlay */}
         <div className="absolute inset-0 -z-10">
-          <Image
-            src={heroBg}
-            alt="President Bola Ahmed Tinubu"
-            fill
-            priority
-            sizes="100vw"
-            className="hero-bg object-cover object-top"
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-tsg-deep/95 via-tsg-green/75 to-tsg-green/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-tsg-deep/90 via-transparent to-transparent" />
+          {slides.map((src, i) => (
+            <div key={`${src}-${i}`} className={`hero-slide ${i === current ? 'is-active' : ''}`}>
+              {inWindow(i) && (
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  priority={i === 0}
+                  sizes="100vw"
+                  className="hero-slide-img object-cover object-center"
+                />
+              )}
+            </div>
+          ))}
+          {/* clean, even tint for legibility — no gradients */}
+          <div className="absolute inset-0 bg-tsg-deep/45" />
           <div className="hero-grain absolute inset-0" aria-hidden="true" />
         </div>
 
+        {/* content */}
         <div className="mx-auto w-full max-w-7xl px-4 py-28 sm:px-6 md:py-32 lg:px-8">
           <div className="max-w-2xl">
-            <p className="hero-eyebrow eyebrow text-tsg-gold-soft">Renewed Hope Agenda</p>
-            <h1 className="hero-title font-display mt-5 font-semibold leading-[1.02] tracking-tight">
+            <p className="hero-eyebrow eyebrow text-white/75">Renewed Hope Agenda</p>
+            <h1 className="hero-title font-display mt-6 tracking-tight">
               <span className="hero-line">
-                <span className="hero-line-inner">Renewed Hope.</span>
+                <span className="hero-word font-semibold">Renewed</span>{' '}
+                <span className="hero-word font-semibold">Hope.</span>
               </span>
               <span className="hero-line">
-                <span className="hero-line-inner italic text-tsg-gold">Stronger Nigeria.</span>
+                <span className="hero-word font-light italic text-white/95">Stronger</span>{' '}
+                <span className="hero-word font-light italic text-white/95">Nigeria.</span>
               </span>
             </h1>
-            <p className="hero-sub mt-6 max-w-xl text-lg text-white/85 md:text-xl">
+            <span className="hero-divider mt-7" aria-hidden="true" />
+            <p className="hero-sub mt-7 max-w-lg text-lg leading-relaxed text-white/80 md:text-xl">
               Joining hands with President Bola Ahmed Tinubu to build a brighter future for
               every Nigerian — one community, one citizen at a time.
             </p>
-            <div className="hero-cta mt-9 flex flex-wrap gap-4">
+            <div className="hero-cta mt-10 flex flex-wrap items-center gap-4">
               <Link
                 href="/register"
-                className="group inline-flex items-center gap-2 rounded-full bg-tsg-gold px-7 py-3.5 font-semibold text-tsg-deep shadow-lg shadow-black/20 transition hover:bg-tsg-gold-soft hover:shadow-xl"
+                className="group inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 font-semibold text-tsg-green shadow-lg shadow-black/20 transition hover:bg-white/90"
               >
                 Become a Member
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-3.5 font-semibold text-white backdrop-blur-sm transition hover:border-white hover:bg-white/10"
+                className="inline-flex items-center gap-2 rounded-full border border-white/50 px-7 py-3.5 font-semibold text-white transition hover:border-white hover:bg-white/10"
               >
                 Our Vision
               </Link>
@@ -253,10 +268,29 @@ export default function Hero({ images }: { images: string[] }) {
           </div>
         </div>
 
-        <a href="#stats" className="hero-scroll" aria-label="Scroll to explore">
-          <span>Scroll</span>
-          <span className="hero-scroll-line" aria-hidden="true" />
-        </a>
+        {/* carousel controls: progress bar + prev/next */}
+        {len > 1 && (
+          <div className="absolute inset-x-0 bottom-9 z-10">
+            <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
+              <div className="hero-controls flex flex-1 items-center gap-4">
+                <div className="hero-prog">
+                  <span className="hero-prog-fill" key={`${current}-${introDone}`} />
+                </div>
+                <span className="text-xs font-medium tracking-wider text-white/70 tabular-nums">
+                  {String(current + 1).padStart(2, '0')} / {String(len).padStart(2, '0')}
+                </span>
+              </div>
+              <div className="hero-controls flex items-center gap-3">
+                <button type="button" className="hero-arrow" onClick={prev} aria-label="Previous slide">
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <button type="button" className="hero-arrow" onClick={next} aria-label="Next slide">
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
 
       {/* ---- intro overlays (removed once the sequence finishes) ---- */}
@@ -264,27 +298,17 @@ export default function Hero({ images }: { images: string[] }) {
         <>
           <div className="opening-reveal" aria-hidden="true">
             <div className="opening-frame">
-              {frames.map((src, i) => (
-                <img key={`${src}-${i}`} src={src} alt="" decoding="async" />
+              {burst.map((src, i) => (
+                <div key={`${src}-${i}`} className="opening-frame-slide">
+                  <Image src={src} alt="" fill sizes="60vw" className="object-cover object-center" />
+                </div>
               ))}
             </div>
           </div>
 
           <div className="opening-preloader">
-            <button
-              type="button"
-              onClick={skip}
-              className="opening-skip"
-              aria-label="Skip intro"
-            >
-              Skip
-            </button>
             <div className="opening-logo">
               <LogoTrace />
-            </div>
-            <div className="opening-counter" aria-live="polite">
-              <span ref={counterRef}>0</span>
-              <span className="opening-pct">%</span>
             </div>
           </div>
         </>
