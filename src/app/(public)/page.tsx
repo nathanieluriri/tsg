@@ -144,7 +144,7 @@ export default async function HomePage() {
       />
 
       {/* -------------------------------------------------------------- Impact */}
-      <ImpactPrograms />
+      {/* <ImpactPrograms /> */}
 
       {/* ------------------------------------------------------------- Journey */}
       <JourneyTimeline />

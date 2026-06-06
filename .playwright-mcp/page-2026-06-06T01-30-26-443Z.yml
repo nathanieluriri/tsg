@@ -1,0 +1,244 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - link "Tinubu Support Group" [ref=e5] [cursor=pointer]:
+          - /url: /
+          - img "Tinubu Support Group" [ref=e6]
+        - button "Menu" [ref=e7] [cursor=pointer]:
+          - img [ref=e8]
+    - main [ref=e9]:
+      - region "Renewed Hope. Stronger Nigeria." [ref=e11]:
+        - generic [ref=e101]:
+          - paragraph [ref=e102]: Renewed Hope Agenda
+          - heading "Renewed Hope. Stronger Nigeria." [level=1] [ref=e103]:
+            - generic [ref=e104]:
+              - generic [ref=e105]: Renewed
+              - generic [ref=e106]: Hope.
+            - generic [ref=e107]:
+              - generic [ref=e108]: Stronger
+              - generic [ref=e109]: Nigeria.
+          - paragraph [ref=e111]: Joining hands with President Bola Ahmed Tinubu to build a brighter future for every Nigerian — one community, one citizen at a time.
+          - generic [ref=e112]:
+            - link "Become a Member" [ref=e113] [cursor=pointer]:
+              - /url: /register
+              - text: Become a Member
+              - img [ref=e114]
+            - link "Our Vision" [ref=e116] [cursor=pointer]:
+              - /url: /about
+        - generic [ref=e118]:
+          - generic [ref=e122]: 22 / 86
+          - generic [ref=e123]:
+            - button "Previous slide" [ref=e124] [cursor=pointer]:
+              - img [ref=e125]
+            - button "Next slide" [ref=e127] [cursor=pointer]:
+              - img [ref=e128]
+      - generic [ref=e154]:
+        - generic [ref=e155]:
+          - generic [ref=e156]: "0"
+          - generic [ref=e157]: States & FCT
+        - generic [ref=e158]:
+          - generic [ref=e159]: "0"
+          - generic [ref=e160]: Local Governments
+        - generic [ref=e161]:
+          - generic [ref=e162]: "0"
+          - generic [ref=e163]: Geopolitical Zones
+        - generic [ref=e164]:
+          - generic [ref=e165]: "0"
+          - generic [ref=e166]: Mobilising Since
+      - region "Who We Are and Leadership & Vision" [ref=e481]:
+        - generic [ref=e485]:
+          - generic [ref=e486]:
+            - img "President Bola Ahmed Tinubu" [ref=e487]
+            - img "President Bola Ahmed Tinubu" [ref=e489]
+          - generic [ref=e490]:
+            - generic [ref=e491]:
+              - paragraph [ref=e492]: Who We Are
+              - heading [level=2] [ref=e527]:
+                - generic [ref=e494]: A Movement For
+                - text: Renewed Hope
+              - paragraph [ref=e495]: The Tinubu Support Group is a nationwide community of individuals and groups standing with President Bola Ahmed Tinubu — advancing policies, initiatives and developmental programs that build a better Nigeria.
+              - link [ref=e528] [cursor=pointer]:
+                - /url: /about
+                - text: Read our story
+                - img [ref=e498]
+            - generic [ref=e500]:
+              - paragraph [ref=e501]: Leadership & Vision
+              - heading "Renewed Hope" [level=2] [ref=e529]:
+                - generic [ref=e503]: Renewed
+                - text: Hope
+              - paragraph [ref=e504]: We stand with President Tinubu to turn the Renewed Hope agenda into real progress — championing reform, opportunity and unity in every community.
+              - link "About the President" [ref=e530] [cursor=pointer]:
+                - /url: /pbat
+                - text: About the President
+                - img [ref=e507]
+      - generic [ref=e246]:
+        - generic [ref=e247]:
+          - paragraph [ref=e248]: What We Stand For
+          - heading "Programs driving the Renewed Hope agenda" [level=2] [ref=e249]
+          - paragraph [ref=e250]: Three commitments guide everything we do as we mobilise Nigerians behind a shared vision for the nation.
+        - generic [ref=e251]:
+          - article [ref=e253]:
+            - img [ref=e257]
+            - generic [ref=e260]:
+              - heading "Youth Empowerment" [level=3] [ref=e261]
+              - paragraph [ref=e262]: Investing in education, skills and innovation so every young Nigerian can build a future at home.
+          - article [ref=e264]:
+            - img [ref=e268]
+            - generic [ref=e271]:
+              - heading "Economic Growth" [level=3] [ref=e272]
+              - paragraph [ref=e273]: Backing sustainable policies and enterprise that create jobs and lift families across the nation.
+          - article [ref=e275]:
+            - img [ref=e279]
+            - generic [ref=e281]:
+              - heading "Inclusive Governance" [level=3] [ref=e282]
+              - paragraph [ref=e283]: Championing transparency, accountability and citizen participation at every level of leadership.
+      - generic [ref=e285]:
+        - generic [ref=e286]:
+          - paragraph [ref=e287]: Our Journey
+          - heading "From a shared belief to a national movement" [level=2] [ref=e288]
+        - generic [ref=e289]:
+          - generic [ref=e294]:
+            - text: "2019"
+            - heading "The movement begins" [level=3] [ref=e295]
+            - paragraph [ref=e296]: Supporters across Nigeria come together around a shared vision of renewed hope.
+          - generic [ref=e301]:
+            - text: "2021"
+            - heading "Grassroots mobilisation" [level=3] [ref=e302]
+            - paragraph [ref=e303]: Coordination expands into communities across the six geopolitical zones.
+          - generic [ref=e308]:
+            - text: "2023"
+            - heading "A nationwide network" [level=3] [ref=e309]
+            - paragraph [ref=e310]: Active membership grows across all 36 states and the Federal Capital Territory.
+          - generic [ref=e315]:
+            - text: "2024"
+            - heading "Programs take root" [level=3] [ref=e316]
+            - paragraph [ref=e317]: Youth, economic and governance initiatives move from advocacy into action.
+          - generic [ref=e322]:
+            - text: Today
+            - heading "Stronger together" [level=3] [ref=e323]
+            - paragraph [ref=e324]: A united community advancing the Renewed Hope agenda, one citizen at a time.
+      - region "What people are saying" [ref=e325]:
+        - generic [ref=e327]:
+          - paragraph [ref=e328]: Voices of the Movement
+          - img [ref=e329]
+          - blockquote [ref=e533]: “From the FCT to the riverside communities, the message of renewed hope is the same.”
+          - generic [ref=e333]:
+            - text: Grace I.
+            - generic [ref=e334]: Regional Volunteer · Bayelsa
+          - generic [ref=e335]:
+            - button "Previous testimonial" [ref=e336] [cursor=pointer]:
+              - img [ref=e337]
+            - generic [ref=e339]:
+              - button "Go to testimonial 1" [ref=e340] [cursor=pointer]
+              - button "Go to testimonial 2" [ref=e341] [cursor=pointer]
+              - button "Go to testimonial 3" [ref=e342] [cursor=pointer]
+              - button "Go to testimonial 4" [ref=e343] [cursor=pointer]
+            - button "Next testimonial" [ref=e344] [cursor=pointer]:
+              - img [ref=e345]
+      - generic [ref=e348]:
+        - generic [ref=e349]:
+          - generic [ref=e350]:
+            - paragraph [ref=e351]: From the Movement
+            - heading "Latest News" [level=2] [ref=e352]
+          - link "View all posts" [ref=e353] [cursor=pointer]:
+            - /url: /blog
+            - text: View all posts
+            - img [ref=e354]
+        - generic [ref=e357]:
+          - img [ref=e359]
+          - paragraph [ref=e362]: Fresh updates are on the way
+          - paragraph [ref=e363]: Stories, press releases and updates from across the movement will appear here. Check back soon.
+          - link "Visit the blog" [ref=e364] [cursor=pointer]:
+            - /url: /blog
+            - text: Visit the blog
+            - img [ref=e365]
+      - region "Find us — the Tinubu Support Group head office in Maitama, Abuja" [ref=e367]:
+        - heading "Find us — the Tinubu Support Group head office in Maitama, Abuja" [level=2] [ref=e368]
+        - generic [ref=e369]:
+          - img [ref=e372]:
+            - generic [ref=e378]: LAKE CHAD CRESCENT
+            - generic [ref=e379]: LIMPOPO STREET
+            - generic [ref=e380]: WIKKI SPRING STREET
+            - generic [ref=e381]: YOBE CLOSE
+            - generic [ref=e382]: YEDSERAM CRESCENT
+            - generic [ref=e383]: GURARA STREET
+            - generic [ref=e387]: SPRINGHALL SCHOOL
+            - generic [ref=e391]: LANDMARK PLAZA
+            - generic [ref=e395]: HIGH COMMISSION OF INDIA
+            - generic [ref=e401]: TSG
+          - generic [ref=e407]:
+            - generic [ref=e408]:
+              - paragraph [ref=e409]: Find Us
+              - paragraph [ref=e410]: The Tinubu Support Group is headquartered in the heart of Abuja — Maitama, in the Federal Capital Territory. Come and be part of the movement.
+            - generic [ref=e411]:
+              - generic [ref=e412]:
+                - img [ref=e413]
+                - generic [ref=e416]:
+                  - paragraph [ref=e417]: Tinubu Support Group
+                  - paragraph [ref=e418]: 2 Kainji Crescent, Maitama, Abuja, FCT
+              - link "Open in Google Maps" [ref=e419] [cursor=pointer]:
+                - /url: https://www.google.com/maps?cid=9709369009114742493&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAMYASAF&hl=en&gl=NG&source=embed
+                - text: Open in Google Maps
+                - img [ref=e420]
+      - generic [ref=e428]:
+        - paragraph [ref=e429]: Be Part Of It
+        - heading "Add your voice to the movement" [level=2] [ref=e430]
+        - paragraph [ref=e431]: Whether you join as an individual or register your group, every Nigerian who stands up makes the vision of a Renewed Hope stronger.
+        - generic [ref=e432]:
+          - link "Become a Member" [ref=e433] [cursor=pointer]:
+            - /url: /register
+            - img [ref=e434]
+            - text: Become a Member
+            - img [ref=e439]
+          - link "Register a Group" [ref=e441] [cursor=pointer]:
+            - /url: /group-reg
+    - contentinfo [ref=e442]:
+      - generic [ref=e443]:
+        - generic [ref=e444]:
+          - heading "Tinubu Support Group" [level=3] [ref=e445]
+          - paragraph [ref=e446]: 2 Kainji Cres, Maitama, Abuja
+        - generic [ref=e447]:
+          - heading "Useful Links" [level=4] [ref=e448]
+          - list [ref=e449]:
+            - listitem [ref=e450]:
+              - link "Home" [ref=e451] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e452]:
+              - link "About" [ref=e453] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e454]:
+              - link "Blog" [ref=e455] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e456]:
+              - link "PBAT" [ref=e457] [cursor=pointer]:
+                - /url: /pbat
+            - listitem [ref=e458]:
+              - link "FAQ" [ref=e459] [cursor=pointer]:
+                - /url: /faq
+        - generic [ref=e460]:
+          - heading "Register" [level=4] [ref=e461]
+          - list [ref=e462]:
+            - listitem [ref=e463]:
+              - link "Individual" [ref=e464] [cursor=pointer]:
+                - /url: /register
+            - listitem [ref=e465]:
+              - link "National" [ref=e466] [cursor=pointer]:
+                - /url: /nationals
+            - listitem [ref=e467]:
+              - link "Sub-National" [ref=e468] [cursor=pointer]:
+                - /url: /sub-nationals
+            - listitem [ref=e469]:
+              - link "Regions" [ref=e470] [cursor=pointer]:
+                - /url: /region
+        - generic [ref=e471]:
+          - heading "Newsletter" [level=4] [ref=e472]
+          - generic [ref=e473]:
+            - textbox "you@example.com" [ref=e474]
+            - button "Subscribe" [ref=e475] [cursor=pointer]
+      - generic [ref=e477]:
+        - generic [ref=e478]: © 2026 Tinubu Support Group
+        - generic [ref=e479]: All rights reserved.
+  - button "Open Next.js Dev Tools" [ref=e515] [cursor=pointer]:
+    - img [ref=e516]
+  - alert [ref=e519]

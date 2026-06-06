@@ -15,6 +15,14 @@ const SPANS = [
   '', // 2 Inclusive — small
 ];
 
+// Responsive image sizes per tile, matching the bento spans so the browser
+// never fetches a smaller image than the tile actually renders.
+const SIZES = [
+  '(max-width: 1024px) 100vw, 50vw', // 0 Youth — hero (full → half)
+  '(max-width: 640px) 100vw, 50vw', // 1 Economic — wide (full → half)
+  '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw', // 2 Inclusive — small
+];
+
 export default function ProgramsBento() {
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -38,6 +46,7 @@ interface TiltCardProps {
 }
 
 function TiltCard({ program, className, index }: TiltCardProps) {
+  // outerRef/innerRef are wired now and consumed by the Task 3 tilt handler.
   const outerRef = useRef<HTMLElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const isHero = index === 0;
@@ -46,22 +55,21 @@ function TiltCard({ program, className, index }: TiltCardProps) {
   return (
     <article
       ref={outerRef}
-      className={`group relative min-h-[260px] overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-xl shadow-black/30 backdrop-blur transition-colors duration-300 hover:border-emerald-400/40 [perspective:1000px] ${className}`}
+      className={`group relative min-h-[260px] rounded-3xl border border-white/10 bg-white/[0.04] shadow-xl shadow-black/30 backdrop-blur transition-colors duration-300 hover:border-emerald-400/40 [perspective:1000px] ${className}`}
     >
       <div ref={innerRef} className="relative h-full [transform-style:preserve-3d]">
-        {/* Base image plane (stays at Z=0 → reads as receding behind the copy) */}
-        <Image
-          src={program.image}
-          alt=""
-          fill
-          sizes={
-            isHero
-              ? '(max-width: 1024px) 100vw, 50vw'
-              : '(max-width: 1024px) 100vw, 25vw'
-          }
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#070809] via-[#070809]/40 to-transparent" />
+        {/* Image plane — clipped to the rounded card. Kept off the perspective
+            element so the translateZ layers below are never clipped. */}
+        <div className="absolute inset-0 overflow-hidden rounded-3xl">
+          <Image
+            src={program.image}
+            alt=""
+            fill
+            sizes={SIZES[index]}
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#070809] via-[#070809]/40 to-transparent" />
+        </div>
 
         {/* Icon chip — pops forward */}
         <span className="absolute left-5 top-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/95 text-tsg-green shadow-lg [transform:translateZ(60px)]">
@@ -89,7 +97,7 @@ function CtaTile() {
       className="group relative flex min-h-[260px] flex-col justify-between overflow-hidden rounded-3xl border border-emerald-400/30 bg-gradient-to-br from-tsg-green to-tsg-deep p-6 shadow-xl shadow-emerald-900/30 transition-colors duration-300 hover:border-emerald-300/60 sm:col-span-2 lg:col-span-1"
     >
       <span
-        aria-hidden
+        aria-hidden="true"
         className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-emerald-300/20 blur-3xl transition-opacity duration-300 group-hover:opacity-80"
       />
       <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/15 text-white ring-1 ring-white/25">
