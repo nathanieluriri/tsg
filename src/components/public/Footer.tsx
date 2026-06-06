@@ -16,7 +16,7 @@ export default function Footer({ setting }: Props) {
   );
 
   return (
-    <footer className="bg-gray-900 text-gray-200 mt-16">
+    <footer className="bg-gray-900 text-gray-200 ">
       <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
           <h3 className="font-bold mb-3 text-white">{setting.title || 'Tinubu Support Group'}</h3>

@@ -256,8 +256,8 @@ export default async function HomePage() {
 
       {/* ----------------------------------------------------------------- FAQ */}
       {faqs.length > 0 && (
-        <section className="bg-tsg-cream">
-          <div className="mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:px-8">
+        <section className="bg-tsg-cream min-h-0 h-fit">
+          <div className="mx-auto max-w-3xl min-h-0 px-4 py-20 sm:px-6 lg:px-8">
             <Reveal className="text-center">
               <p className="eyebrow justify-center text-tsg-green">Good To Know</p>
               <h2 className="font-display mt-3 text-3xl font-semibold text-tsg-deep md:text-4xl">
