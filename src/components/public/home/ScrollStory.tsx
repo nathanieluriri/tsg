@@ -106,12 +106,17 @@ function PinnedStory({ description, vision, mission }: ScrollStoryProps) {
       el.style.opacity = s.toFixed(3);
       el.style.transform = `translate3d(0, ${(28 * (1 - s)).toFixed(2)}px, 0)`;
     }
-    // Only the dominant frame is interactive / perceivable. `inert` removes the
-    // other from tab order, the a11y tree, pointer events, and text selection --
-    // fixing the "focusable CTA inside a hidden frame" problem in one move.
+    // Only the dominant frame is interactive / perceivable. `inert` (Baseline
+    // 2023: Chrome 102, Safari 15.5, Firefox 112) removes the other from tab
+    // order, pointer events, and selection. PinnedStory only mounts on
+    // fine-pointer desktops, so sub-112 Firefox simply gets the static fallback.
+    // `aria-hidden` is paired in lockstep as belt-and-suspenders so the inactive
+    // frame's heading never doubles up in the screen-reader outline.
     const aDominant = p < 0.5;
     frameARef.current?.toggleAttribute('inert', !aDominant);
     frameBRef.current?.toggleAttribute('inert', aDominant);
+    frameARef.current?.setAttribute('aria-hidden', aDominant ? 'false' : 'true');
+    frameBRef.current?.setAttribute('aria-hidden', aDominant ? 'true' : 'false');
   }, []);
 
   // Collect the animated segments once and paint the initial state before first
@@ -131,7 +136,11 @@ function PinnedStory({ description, vision, mission }: ScrollStoryProps) {
   usePinProgress(wrapperRef, apply);
 
   return (
-    <section ref={wrapperRef} className="relative h-[200vh]">
+    <section
+      ref={wrapperRef}
+      aria-label="Who We Are and Leadership & Vision"
+      className="relative h-[200vh]"
+    >
       <div className="sticky top-0 isolate flex h-[100svh] items-center overflow-hidden">
         {/* Background cross-fade layers (cream base, green on top fading in). */}
         <div className="absolute inset-0 bg-tsg-cream" aria-hidden="true" />
@@ -169,7 +178,10 @@ function PinnedStory({ description, vision, mission }: ScrollStoryProps) {
 
           {/* Text column (RIGHT): two overlapping frames cross-fade. */}
           <div className="relative h-[68svh] max-h-[40rem]">
-            {/* Frame A -- Who We Are */}
+            {/* Frame A -- Who We Are.
+                The pinned frames are height-constrained (h-[68svh] max-h-[40rem]),
+                so prose below is line-clamped for fit; the static fallback and the
+                linked /about & /pbat pages show the full copy. */}
             <div ref={frameARef} className="absolute inset-0 flex flex-col justify-center">
               <p data-blur className="eyebrow text-tsg-green">
                 {STORY.about.eyebrow}
